@@ -33,7 +33,11 @@ Numbering below is the CURRENT, corrected numbering (Ch4 = old Ch4+Ch5 merged, e
 4. **Colleague's existing Van Rijn/Deltares code — bugs found during review** (full code was shared, extensively reviewed line by line):
    - No method-selection logic at all — runs Van Rijn unconditionally on every point regardless of seabed type/slope/breaking (direct real-world example of the thesis's own stated problem).
    - `r` (damage reduction coefficient) and `gstr` (turbulence/structure factor) hardcoded as constants, not adjustable per project.
-   - **Likely real bug**: berm geometry formula uses `T = 6*(TSH)**2 + 50*TSH + 2.4` but the published Deltares RoBeD formula is `Bberm/hberm = 6000*θ² + 50*θ + 2.4` — coefficient off by 1000x. Hand-calc done: difference is minimal at small θ (~0.01) but grows to 4-9x already at θ=0.05 (near the critical Shields value) and 50x+ at θ=0.5. **Message sent to Shamsa about this (see section 6), she asked to (a) check parameter dimensions — code's `TSH` is a *rescaled* version of the raw Shields value, not confirmed equivalent to Deltares' θ, and (b) do a hand calculation (done, see above) and run one real example point through the code (not yet done).** Willem is picking this up "properly" next week; not resolved.
+   - **UPDATE (this session, code + real sample data obtained and traced through, see `code/` folder):** the code is now saved in the repo at `code/nkt_stability_tool_original.py`, with sample input data at `code/sample_data/` and a standalone repro script at `code/bug_analysis_orbital_velocity.py`.
+     - **Confirmed real bug, root cause identified**: the wave orbital velocity calculation (`Uwc1`/`Uwc2`, both combo blocks) wraps the sinh() argument in an extra `np.radians()` call: `sinh(radians(2*pi*WL/LSc))`. That argument (kh = 2·π·h/L) is already a dimensionless ratio, not a degree-based angle, so the conversion is wrong. Traced with a real data point (point_ID 37.919, Hs=3.86m, Tp=8.8s, h=18.1m): code-as-written gives Uw ≈ 68.6 m/s (physically impossible), the standard linear-wave-theory formula without the erroneous wrap gives Uw ≈ 0.97 m/s (realistic). **Factor ~71x**, confirmed numerically, reproducible via `code/bug_analysis_orbital_velocity.py`.
+     - **Retracted**: an earlier suspicion this session that the critical-Shields formula (`Tetacrshic1` etc., missing a ×1.2 term compared to the Deltares HaSPro Eq. A.6 / Soulsby form) was a bug turned out to be wrong — checked directly against Van Rijn (2019) Eq. 3 (`papers/VanRijn_2019_CriticalRockMovement.pdf`, p.3, verified visually) which uses exactly `0.3/(1+D*) + 0.055[1-exp(-0.02D*)]`, **no 1.2 factor**. The code correctly follows Van Rijn (2019), not HaSPro/Soulsby directly. This part of the code is fine.
+     - **Conceptual concern (not fully resolved)**: `Hydroberm['TSh']` is Van Rijn's θcr (critical/threshold Shields parameter for the rock's own resistance to motion), which then gets rescaled into `TSH` and fed into the Deltares RoBeD reshaping formula (`T = 6*TSH**2 + 50*TSH + 2.4`). But HaSPro's own formula expects θ, the actual applied mobility number under design load (see their worked example, Appendix C.5: θ=0.014 computed from real shear stress, not a threshold value). θcr and θ are different quantities in HaSPro's own notation. Whether this conflation matters in practice is unclear until the orbital-velocity bug above is fixed first.
+     - **Revised view on 6 vs 6000**: given the ~71x velocity inflation bug feeds into every downstream quantity (shear stress ∝ Uw², then D50, then TSH), the working hypothesis now is that "6" may have been an ad-hoc adjustment to compensate for absurdly large numbers caused by the velocity bug, rather than a deliberate alternate convention. **Recommended next step (message drafted for Shamsa, see section 6): fix the orbital velocity formula first, then re-check whether 6000 (the published HaSPro coefficient) gives sensible results with corrected velocities.** Not yet done with real project data, still open.
    - Duplicate/dead imports (token, xml.etree, sympy, array, math, csv unused), a variable `in3` silently overwritten and its first definition lost, inconsistent DataFrame construction patterns, no iteration cap on convergence loops, magic numbers with no explanation, hardcoded file paths bypassing its own GUI file-picker.
    - The 10yr-wave/100yr-current + 100yr-wave/10yr-current combination logic (take the governing one) is validated as legitimate practice, not a bug — confirmed by DNV-RP-F109 (see section 2).
 
@@ -97,9 +101,23 @@ Still missing from the code: the actual formula bodies (Van Rijn's full iterativ
 
 **Note:** all of these are scratchpad files (session-specific temp storage) except the papers/ folder and the OCR fix, which are committed to the git repo on branch `claude/file-access-question-hhu7j7`. If the scratchpad files are needed in a new session, they may not persist — regenerate from the scripts described above if missing (`build_comparison_doc.py`, `add_formula_tables.py`, `build_flowchart_v3.py`, `build_example_graph.py`, all were written to the scratchpad and could be lost between sessions).
 
-## 6. Active thread: email to Shamsa (NKT supervisor)
+## 6. Active thread: message to Shamsa (NKT supervisor)
 
-Status: user is about to send a message saying he'll properly investigate next week, needs to check references, and gave a hand-calc preview (small θ ≈ minimal difference, but already 4-9x at θ≈0.05). Not yet confirmed sent. Next step when resumed: (a) check whether the code's rescaled `TSH` variable is dimensionally/scale-equivalent to Deltares' raw θ, (b) run one real Hydroinput data point through both the 6 and 6000 versions and compare to what's physically expected.
+Status (this session): (b) is now done, code obtained in full and traced through with a real Hydroinput data point, see updated section 3 point 4 above. Root cause found: an extra `np.radians()` wrap on an already-dimensionless sinh() argument in the orbital velocity formula, inflating Uw by ~71x. Draft message prepared for Shamsa (not yet confirmed sent) explaining this and proposing to fix the velocity formula first, then re-test with the published 6000 coefficient:
+
+> Hi Shamsa,
+>
+> Following up on the 6 vs 6000 question in the RoBeD berm geometry formula: I think I found the actual root cause.
+>
+> There is a separate bug in the wave orbital velocity calculation (`Uwc1`/`Uwc2`), an extra `radians()` conversion is applied to the sinh() argument, which is already a dimensionless ratio (2·π·h/L) and should not be converted. I tested this with a real data point (Hs=3.86m, Tp=8.8s, h=18.1m) and the bug makes the orbital velocity come out around 70 times too large (68.6 m/s instead of a physically realistic 0.97 m/s).
+>
+> My hypothesis is that this is what led to using 6 instead of the published 6000 in the berm geometry formula. With velocities inflated by ~70x, using the correct 6000 coefficient would have produced obviously absurd results, so 6 may have been an ad-hoc adjustment to get sane-looking numbers, rather than a deliberate or correct choice.
+>
+> Proposed next step: fix the orbital velocity formula first (remove the extra `radians()` call), rerun with realistic velocities, and then check whether the formula works correctly again with the published 6000 coefficient.
+>
+> Happy to walk through the calculation if useful.
+
+Next step when resumed: confirm whether this was actually sent, and follow up once Shamsa/the code's author responds, particularly on the still-open conceptual question (θcr vs θ, see section 3 point 4) and on getting the fix tested against real project output.
 
 ## 7. Working style agreements established this session (important, apply everywhere)
 
@@ -113,10 +131,26 @@ Status: user is about to send a message saying he'll properly investigate next w
 
 ## 8. Immediate next steps when resuming
 
-1. Confirm whether Ch4.4 rewrite and MTOC-check text actually got pasted into the user's document (last known state: given in chat, not confirmed).
+**Done this session** (new session, continued from this handoff): DNV-RP-F109 (2021) obtained and fully read, added as a cited source in Ch2.2 (breaking/validity criterion + wave asymmetry mechanism), Ch2.3 (seabed mobility criterion), Ch3.1 (§2.6 load combinations, replacing the old "kept open" sentence), and Ch3.2 (§3.3 wave directionality/spreading, plus a Hs vs Hm0 precision fix sourced from Schiereck & Verhagen Eq. 7.36-7.38). Item 6 below is therefore done. The colleague's stability code was obtained in full this session and is now saved at `code/nkt_stability_tool_original.py` (+ `code/sample_data/`, `code/bug_analysis_orbital_velocity.py`), and traced through with real data: found a confirmed ~71x orbital-velocity bug (spurious `np.radians()` wrap, see section 3 point 4), retracted an earlier false alarm about the critical-Shields formula (code correctly follows Van Rijn 2019 Eq. 3, not HaSPro), and drafted (not yet confirmed sent) a message to Shamsa about it (section 6). Item 5 below is thus substantially advanced but not closed.
+
+A broader "what would my professor flag" review was also done this session. Findings, with user's stated priority (done now vs. later):
+- Ch2.1: literal `(Figure x)` placeholder for the three-zone diagram — user: later.
+- Ch2.2: wrong cross-reference `(Chapter 6)` should be `(Chapter 5)` (only inconsistent one found, rest checked and correct) — user: **done**.
+- Ch8: a bare, uncited ResearchGate URL at the end of the chapter — user: later.
+- Ch1 Introduction still bullet-only, no explicit research questions — user: later.
+- Ch7 still mostly outline/notes, not written prose — user: later.
+- Ch8 ends with "I have to formulate the research questions" instead of actual RQs, and the r/Nod/deformation-class question is presented as 3 open options with no decision — user: later.
+- MTOC boundary-check text still not in Ch7 — user: later.
+- Sitewide chapter-numbering consistency pass — user: later.
+- Data confidentiality statement for NKT route data — user: later.
+
+Remaining next steps:
+1. Confirm whether Ch4.4 rewrite and MTOC-check text actually got pasted into the user's document (last known state: given in chat, not confirmed, still open from before this session).
 2. Write Chapter 7 (Design Framework & Computational Approach) properly — needs new "Method Selection Logic" subsection, needs the MTOC boundary check text, needs the actual formulas restated from the reference Word doc, needs Failure Criteria updated for all 6 methods (not just 3), needs r/Nod/deformation-class open question flagged explicitly in text.
-3. Write Chapter 1 (Introduction) and Chapter 8 (Knowledge Gaps) — not started yet.
-4. Resolve or bring back a supervisor decision on the r/Nod/deformation-class mapping question (Monday meeting).
-5. Follow up on the Shamsa 6-vs-6000 investigation once he's had time to check references and run a real example point.
-6. Add DNV-RP-F109 as a formally cited source in the thesis where the return-period combination logic is discussed.
-7. Continue building the actual Python tool: write `wavelength()`, the full `van_rijn_d50()`, then Herrera & Medina/Van Gent/Deltares formula functions, using the verified equations already documented in the reference Word doc.
+3. Write Chapter 1 (Introduction) and Chapter 8 (Knowledge Gaps) — not started yet, including actual research questions (currently just a to-do note in Ch8).
+4. Resolve or bring back a supervisor decision on the r/Nod/deformation-class mapping question.
+5. Follow up on the Shamsa message once sent and once she/the code author responds, particularly on the θcr-vs-θ conceptual question (section 3 point 4) and on testing the orbital-velocity fix against real project output.
+6. ~~Add DNV-RP-F109 as a formally cited source~~ — done this session (Ch2.2, Ch2.3, Ch3.1, Ch3.2).
+7. Continue building the actual Python tool: write `wavelength()`, the full `van_rijn_d50()`, then Herrera & Medina/Van Gent/Deltares formula functions, using the verified equations already documented in the reference Word doc. Note the colleague's code (now in `code/`) already has a working, Van-Rijn-based D50 iterative solver structure (once the orbital-velocity bug is fixed) that could inform this.
+8. Work through the remaining "professor will flag" items above once the user decides to prioritize them (see list above for what's outstanding).
+9. Ch4.2 (Turbulence-based Parameters) was checked for DNV additions this session: no relevant content found in DNV-RP-F109, no change made.
