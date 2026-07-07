@@ -119,6 +119,51 @@ Status (this session): (b) is now done, code obtained in full and traced through
 
 Next step when resumed: confirm whether this was actually sent, and follow up once Shamsa/the code's author responds, particularly on the still-open conceptual question (θcr vs θ, see section 3 point 4) and on getting the fix tested against real project output.
 
+## 6b. Session update — Ch5/Ch6 DNV integration completed, new paper under review (unresolved)
+
+This is a second, later session continuing from sections 1-6 above. Summary of what changed:
+
+**Ch5 (Rock Stability Assessment Methods) — all changes confirmed pasted (verified via a user-uploaded "check" PDF export of the live document):**
+- New chapter intro written: states there are 6 methods (not 5, user's own miscount corrected), groups them into 3 functional categories matching the existing Ch8 three-stage framework (Hudson/Van der Meer/Van Rijn/Van Gent → stone size + damage level; Herrera & Medina → damage for a candidate size, works the other way around; Deltares RoBeD → full berm geometry + deformation class once size/damage already chosen), and adds a motivation paragraph (mismatched method-to-situation use in industry, companies over-designing to avoid claims risk, correct method choice → sustainable + economical result: less material, less vessel fuel).
+- Every one of the 6 method sections (5.1-5.6) got a short "Purpose / Output / Validity" block added right after the existing prose, giving an at-a-glance summary. Exact wording is in the conversation transcript if needed again.
+- Hudson formula double-checked and visually confirmed against Schiereck & Verhagen (2019) p.195, Eq. 8.10 (`M = ρs·Hsc³/(KD·Δ³·cotα)`, rearranges to `Dn50 = Hs/(Δ·(KD·cotα)^(1/3))`) — matches what was already in the thesis.
+- Van Rijn's variable table (§5.3) was missing `Uw` and `Aw` — both added with their formulas (`Uw = π·Hs/[Tp·sinh(2πh/Ls)]`, `Aw = (0.5·Tp/π)·Uw`).
+- Herrera & Medina's variable table (§5.5) was missing `Dn50` even though the Ch5.8 summary table already listed it as a required input — added, with "how to determine" = "Candidate value to test" (not solved for directly), reinforcing the new intro's point about this method working in reverse.
+
+**Ch6 (Scour) — all changes confirmed pasted except one:**
+- §6.2 (Scour Around Subsea Cables): added DNV-RP-F109 (2021, Section 8.1) nuance — a free span is not purely negative for lateral stability (lift force reduction can make it MORE stable on sand/rock, though not on clay), plus a forward-reference to DNV-RP-F105 for VIV/drag increase once cross-flow vibration sets in.
+- §6.3 (Scour and Berm Stability): added DNV-RP-F109 (2021, Section 8.2) warning that intermittent support can develop into a free span; added a new finding — Deltares HaSPro Handbook (2023, Section 5.2.3.1) explicitly states **"quantitative guidelines [for edge scour around rock berms] are still lacking"** — this legitimises keeping this treatment qualitative rather than being a gap to fix, and forward-references Ch8 as an open point; added DNV-RP-F109 (2021, Section 8.5) benign self-lowering/self-burial effect, with its stated caveats (needs safety margin, does not apply where >10% of bed material by mass is finer than 75 µm, or where hard points like large rocks prevent further lowering).
+- §6.4 (Scour Mitigation Approaches): added DNV-RP-F109 (2021, Section 8.2)'s broader list of on-bottom stability measures (weight coating, trenching, burial, structural anchors, grout bags, big bags) alongside the existing Deltares-sourced mattress/vegetation systems.
+- **NOT YET DONE**: the Ch6 reference/bibliography list at the end of the chapter still needs a bullet added: `DNV-RP-F109 (2021), Section 8.1 (Free spans), Section 8.2 (Mitigating measures), Section 8.5 (Pipeline on mobile seabed)`. Flagged to user, not yet confirmed pasted.
+
+**Conceptual clarification reached with user: does scour actually feed into the design calculations, or is it just context?**
+Answer worked out together: currently just context/narrative, not wired into any Ch5 formula or (as far as drafted) Ch7's computational tool, similar to how anchor/trawl (§6.5) is already explicitly out-of-scope for the tool. Deltares HaSPro (2023, Section 5.2.4) gives an explicit 3-step rock berm dimensioning procedure that was identified as the right structure to adopt for Ch7:
+1. External stability — the existing RoBeD/TOPC calculation (Ch5.6, Eq 20-26).
+2. Interface stability / winnowing check — verify installed berm height ≥ 4 rock layers. **Decision: this SHOULD go into the actual Python tool** — it's simple and needs no unvalidated inputs.
+3. Flexibility / edge-scour check — Deltares gives a "falling apron" volume formula (Eq. 27, after Van Velzen 2012): `Vapron = γs·D50·(nD,top+nD)/(2·sinα)·htot`. **Decision: this formula should NOT go into the code.** It needs `htot` (expected bed lowering) as an input, and Deltares itself admits (Section 5.2.3.1, see above) there is no validated way to predict edge-scour depth for rock berms specifically, so any `htot` used would be a guess and would create false precision. Same reasoning as why anchor/trawl loads aren't computed by default. It should stay as descriptive text only (in Ch6.3 and/or Ch7), explicitly flagged as an open point for Ch8.
+
+Full drafted text for this new Ch7 subsection (in easier English, matching the established style) exists in the conversation transcript, ready to paste once the user actually writes Ch7 in full prose (Ch7 is still in outline/bullet form, so this wasn't pasted anywhere yet, just handed over as text).
+
+**Also clarified for user**: winnowing is fine base material (sand) being sucked OUT through the pores/voids of the rock layer above it, not the rock/filter layer itself washing away. Sourced from Deltares HaSPro (2023, Section 4.2.2): "Winnowing (transport of base material through the scour protection) occurs by sediment transport..."
+
+**New source uploaded by user, read in full, NOT yet used in the thesis (explicit instruction: analyze first, don't write with it yet):**
+`Stability of Rock Berm under Wave and Current Loading (1).pdf` — Thusyanthan, Jegandan & Robert (2013), ISOPE conference paper TPC-0621, Anchorage Alaska. Currently sits in the repo root, not renamed/moved into `papers/` yet, not added to CLAUDE.md's source list. Content: presents two Shields-threshold-based methodologies (Methodology 1 = Soulsby 1997, Methodology 2 = CIRIA Rock Manual 2007) for rock berm stability under wave+current, plus an empirical/graphical "Amplification Factor" to go from flat-seabed D50 to sloped-berm D50 (1:3, 1:4 slopes).
+
+My independent analysis, given to the user before he asked what HIS reasoning was (he hadn't answered before starting a new session — **this is the top open item to pick up next**):
+- Not fundamentally wrong physics, but less rigorous than what's already in the thesis: the slope "Amplification Factor" is read off empirical graphs, not a closed-form validated equation like Van Rijn's Kα1/Kα2 or Deltares' RoBeD model.
+- Scope mismatch: paper's own classification puts "waves alone dominant" below 5 m depth, but its worked example and figures are for 20-300 m depth, i.e. oriented at deeper-water pipeline applications, not the shallow, breaking-wave nearshore zone this thesis focuses on.
+- The paper explicitly warns not to mix its two methodologies, and Methodology 1 (Soulsby-based) likely uses the same θcr formula WITH the 1.2 coefficient seen in Deltares HaSPro Eq. A.6, i.e. a different variant than Van Rijn (2019)'s own simplified formula without that 1.2 term (see section 3 point 4 above) — another data point on the "watch out, there are multiple non-identical published Shields-threshold formulas floating around" theme from the code review.
+
+**Next step when resumed: ask the user again what made him think this might be "the wrong method," compare notes, and only then decide together whether/how anything from it should be used.**
+
+## 6c. Repo/git housekeeping this session
+
+- Colleague's stability tool code and analysis now committed: `code/nkt_stability_tool_original.py`, `code/sample_data/Hydroinput_sample.csv`, `code/sample_data/RockD50_sample.csv`, `code/bug_analysis_orbital_velocity.py`.
+- `DNV-RP-F109 On-bottom stability design of submarine pipelines, cables and umbilicals 2021.pdf` and `Stability of Rock Berm under Wave and Current Loading (1).pdf` both uploaded by user via GitHub web upload directly to `main`, then merged into this branch. Both still sit in the repo root, not renamed/moved into `papers/` per the CLAUDE.md convention yet.
+- The `papers/` reorganisation from the earlier `claude/file-access-question-hhu7j7` branch was merged into `main` via PR #1, and into this branch too.
+- A PR (#2) was auto-created for this branch (`claude/thesis-session-handoff-uba798`) via the Claude Code web UI mid-session. No action needed, just reference it going forward instead of creating a new one.
+- The stop-hook keeps warning that some commits are "Unverified" on GitHub (committer email/signature mismatch). Never addressed since the user hasn't asked for it to be fixed; purely informational, ignorable unless he raises it.
+
 ## 7. Working style agreements established this session (important, apply everywhere)
 
 - **No em-dashes (—) or semicolons (;) anywhere** in thesis text or messages meant to be sent externally — user finds this "too AI-sounding." Use periods/commas/rephrasing instead.
@@ -144,13 +189,18 @@ A broader "what would my professor flag" review was also done this session. Find
 - Sitewide chapter-numbering consistency pass — user: later.
 - Data confidentiality statement for NKT route data — user: later.
 
+**Done in the later session (6b/6c above):** DNV-RP-F109 additions to Ch5 intro/method summaries (Purpose/Output/Validity blocks) and Ch6 (§6.2, §6.3, §6.4), Van Rijn/Herrera & Medina variable table gaps fixed, Hudson formula re-verified, the "does scour feed the calculations" question resolved (winnowing check → in the tool, falling apron formula → text only), winnowing itself clarified conceptually, colleague's code bug fully diagnosed and written up, a new candidate source (Thusyanthan et al. 2013) read and given an initial critical read.
+
+**TOP PRIORITY next step: the user was about to explain why he suspects the Thusyanthan et al. (2013) "Stability of Rock Berm under Wave and Current Loading" paper (see section 6b) is "a wrong method," but ended the session before answering. Ask him again first, before doing anything else with that file.**
+
 Remaining next steps:
-1. Confirm whether Ch4.4 rewrite and MTOC-check text actually got pasted into the user's document (last known state: given in chat, not confirmed, still open from before this session).
-2. Write Chapter 7 (Design Framework & Computational Approach) properly — needs new "Method Selection Logic" subsection, needs the MTOC boundary check text, needs the actual formulas restated from the reference Word doc, needs Failure Criteria updated for all 6 methods (not just 3), needs r/Nod/deformation-class open question flagged explicitly in text.
-3. Write Chapter 1 (Introduction) and Chapter 8 (Knowledge Gaps) — not started yet, including actual research questions (currently just a to-do note in Ch8).
-4. Resolve or bring back a supervisor decision on the r/Nod/deformation-class mapping question.
-5. Follow up on the Shamsa message once sent and once she/the code author responds, particularly on the θcr-vs-θ conceptual question (section 3 point 4) and on testing the orbital-velocity fix against real project output.
-6. ~~Add DNV-RP-F109 as a formally cited source~~ — done this session (Ch2.2, Ch2.3, Ch3.1, Ch3.2).
-7. Continue building the actual Python tool: write `wavelength()`, the full `van_rijn_d50()`, then Herrera & Medina/Van Gent/Deltares formula functions, using the verified equations already documented in the reference Word doc. Note the colleague's code (now in `code/`) already has a working, Van-Rijn-based D50 iterative solver structure (once the orbital-velocity bug is fixed) that could inform this.
-8. Work through the remaining "professor will flag" items above once the user decides to prioritize them (see list above for what's outstanding).
-9. Ch4.2 (Turbulence-based Parameters) was checked for DNV additions this session: no relevant content found in DNV-RP-F109, no change made.
+1. Resolve the Thusyanthan et al. (2013) paper question above — decide together whether/how it's used, and if so, rename/move it into `papers/` per convention.
+2. Add the missing DNV-RP-F109 bibliography line to the end of Ch6 (see 6b above, drafted but not confirmed pasted).
+3. Confirm whether Ch4.4 rewrite and MTOC-check text actually got pasted into the user's document (last known state: given in chat, not confirmed, still open from before the DNV-integration session).
+4. Write Chapter 7 (Design Framework & Computational Approach) properly — needs the new 3-step Deltares dimensioning subsection drafted in 6b above (external stability / interface-winnowing / flexibility-falling-apron), needs a "Method Selection Logic" subsection, needs the MTOC boundary check text, needs the actual formulas restated, needs Failure Criteria updated for all 6 methods, needs the r/Nod/deformation-class open question flagged explicitly in text.
+5. Write Chapter 1 (Introduction) and Chapter 8 (Knowledge Gaps) — not started yet, including actual research questions (currently just a to-do note in Ch8), and the falling-apron/htot open point from 6b should be added to Ch8's knowledge gaps too.
+6. Resolve or bring back a supervisor decision on the r/Nod/deformation-class mapping question.
+7. Follow up on the Shamsa message once sent and once she/the code author responds, particularly on the θcr-vs-θ conceptual question (section 3 point 4) and on testing the orbital-velocity fix against real project output.
+8. Continue building the actual Python tool: write `wavelength()`, the full `van_rijn_d50()`, then Herrera & Medina/Van Gent/Deltares formula functions, plus the interface/winnowing check (≥4 rock layers) from the Ch7 dimensioning procedure. The colleague's code (in `code/`) already has a working, Van-Rijn-based D50 iterative solver structure (once its orbital-velocity bug is fixed) that could inform this.
+9. Work through the remaining "professor will flag" items listed above once the user decides to prioritize them: Ch2.1 `(Figure x)` placeholder, Ch8's bare ResearchGate URL, sitewide chapter-numbering pass, data confidentiality statement.
+10. Ch4.2 (Turbulence-based Parameters) was checked for DNV additions in the earlier session: no relevant content found in DNV-RP-F109, no change made, nothing further needed there.
