@@ -1,0 +1,968 @@
+--- PAGE 1 ---
+ Stability of Rock Berm under Wave and Current Loading 
+ 
+N. I. Thusyanthan1, S. Jegandan2, D. J Robert3  
+1CAPE Group, Singapore; 2Intecsea UK, 3Monash University, Australia  
+ 
+ 
+ 
+ 
+ABSTRACT 
+ 
+Rock berms are used for many different offshore applications. These 
+applications include use of rock berm for protection of offshore 
+pipelines from anchors and trawlers; for mitigating upheaval buckling 
+of pipelines, for mitigating lateral buckling of pipelines; for scour 
+protection. In order for the rock berm to perform its function, it is vital 
+that the rock berm is stable under the design wave and current 
+conditions. Thus it is vital that rock berm stability is assessed correctly. 
+This paper presents an overview of fundamentals of rock berm stability 
+assessment under wave and current conditions. Results presented in this 
+paper will benefit the pipeline engineers involved in rock berm design 
+for Front End Engineering Designs (FEED) and detailed design.   
+ 
+ 
+KEY WORDS:  Rock berm; seabed stability; Chézy coefficient; 
+shield parameter; threshold of motion; wave and current loading  
+ 
+INTRODUCTION 
+ 
+There are thousands of kilometers of offshore pipelines around the 
+world, forming a network for the extraction and transportation of the oil 
+and gas products. Rock berms are used for many different offshore 
+applications; used for protection pipelines from anchors and trawlers; 
+for mitigating upheaval buckling of pipelines, for mitigating lateral 
+buckling of pipelines; for scour protection. 
+ 
+The rock berm stability assessment determines the minimum particle 
+size of rock that would be stable under a given berm configuration and 
+under design wave and current conditions. The fundamentals for the 
+stability of rock berm calculation come from “threshold of motion of 
+sediments”. The static stability of the seabed particles/sediments is 
+determined by threshold of motion of the particle and the shear stresses 
+induced on the particle by the wave and current actions. For very slow 
+flows, the rocks/grains remain immobile. As the flow rate increases, the 
+shear stresses applied on the particles increase and reach a threshold 
+value at which few rocks/grains begin to move. This shear stress is 
+known as the threshold bed shear stress. The corresponding values of 
+current speed or the wave height is known was the threshold current 
+speed or the threshold wave height.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+For stable seabed, D50 of the seabed particles needs to be greater than 
+the D50 corresponding to the threshold of motion.  
+ 
+This paper reviews the fundamentals of threshold of motion and 
+presents the importance of Shields parameter and Chézy coefficient in 
+rock beam stability assessment. Parametric study of seabed mobility (or 
+rock berm stability) was undertaken for varying wave and current 
+conditions. Results of the study are presented in graphical form to 
+simplify the rock berm stability assessment and determine the stable 
+rock sizing for a given rock berm geometry.   
+ 
+SEABED MOBILITY  
+ 
+The seabed mobility depends on the prevailing flow conditions. The 
+flow conditions can be classified as;  
+• 
+Current alone dominant  (sites deeper than about 40 m) 
+• 
+Waves alone dominant  (near-shore zone in depths less than 5 m) 
+• 
+Combined waves and currents (sites in depths between 5 m and 
+40 m)  
+ 
+Seabed features and substrates are influenced by the prevailing flow 
+conditions and hence can change spatially and in time. However, the 
+seabed sediments on the continental shelf are in long-term equilibrium 
+(at least decadal) with the prevailing hydraulic climate. Gravel 
+substrates correspond to those areas experiencing the strongest currents, 
+whilst muddy sediments correspond to weak currents and areas of sand 
+correspond to intermediate surface current strengths of 0.3 to 0.8 m/s. 
+ 
+ 
+ROCK BERM STABILITY METHODOLOGY 
+  
+Over the years, there has been lot of research publications on threshold 
+of motion and rock berm stability calculations. This has led to many 
+users referring to such publications and using the equations proposed in 
+the literature without fully understanding the overall limitations and 
+boundaries of those equations. Different symbols used in literature for 
+the same parameter also leads to unnecessary confusion among 
+practicing engineers. Thus symbols and equations in this paper follow 
+ 
+                                                        The Proceedings of
+The Twenty-third (2013) International OFFSHORE AND POLAR ENGINEERING CONFERENCE 
+                       Anchorage, Alaska, USA, June 30-July 5, 2013, Paper TPC_0621
+
+--- PAGE 2 ---
+the original reference and in some occasions the same equation is 
+provided twice with different symbols to avoid any confusion. This 
+paper aims to provide the two main fundamental methodologies that 
+can be used for the seabed mobility assessment. These are;      
+1. 
+Methodology 1- based on Shields parameter (Soulsby, 1997) 
+2. 
+Methodology 2- based on CIRIA Rock Manual (2007) 
+ 
+METHODOLOGY 1  
+In this methodology, the stability of the rock-berm is determined by 
+threshold of motion shear stress of the rock particle and the shear 
+stressed induced on the rock particle by the wave and current action. 
+For stable rock-berm, the D50 of the rock-berm needs to be greater than 
+the D50 corresponding to the threshold of motion.  
+ 
+Threshold Bed Shear stress 
+The threshold bed shear stress is commonly expressed in non-
+dimensional form as critical Shields parameter.   
+d
+s
+g
+cr
+cr
+)1
+( 
+
+
+
+  
+ 
+ 
+ 
+              (1) 
+Where  
+cr
+
+ =  threshold bed shear stress (N/m2) 
+  =  density of water (kg/m3) 
+s   =  ratio of density of seabed particle to density of water  
+d  =  particle diameter (taken as D50)  
+g  =  acceleration due to gravity (9.81 m/s2)  
+D50  =   also known as median diameter or medium value of particle 
+diameter, it is particle diameter value at which cumulative 
+distribution percentage reaches 50%. 
+ 
+The critical Shields parameter for sands on initially flat horizontal bed 
+can be calculated as below.  
+)]
+02
+.0
+exp(
+1[
+055
+.0
+3.1
+1
+30
+.0
+*
+*
+D
+D
+cr
+
+
+
+
+
+
+                          (2) 
+where  
+d
+s
+g
+D
+3
+/
+1
+2
+*
+)1
+(
+
+
+
+
+
+
+
+,  
+ = kinematic viscosity of water 1.510-6 m2/s  
+The research in seabed movements, Panagiotopoulos et al,(1997) has 
+shown that the cohesive material generally increases the erosion 
+threshold of sandy deposits. The critical bed shear stresses required to 
+displace fine-grained sands increased by up to 90% with the addition of 
+~10% clay. For higher clay contents the threshold shear stress can 
+increase by 2-3 folds, hence seabed with silty clayey sands are less 
+susceptible than pure sands to wave and current induced movements.  
+If the seabed mobility assessment is for mixture of mud and sand, then 
+Mitchener et al, 1996, presented the equation below for critical bed 
+shear stress.  
+
+
+73
+.0
+1000
+.
+015
+.0
+
+
+b
+cr
+
+
+  
+ 
+ 
+            (3) 
+where 
+b
+ is the bulk density (kg/m3) of sediments. 
+ 
+If the bed is sloping or stability is for a rock-berm with a slope, then 
+gravity provides a component of the force on the grain which may 
+increase or decrease the threshold shear stress required for mobility 
+depending of the slope direction. The threshold bed shear stress, τβcr, 
+for a grains on a bed sloping at an angle, β , to the horizontal in a flow 
+making an angle, ψ, to upslope direction can be related to the threshold 
+critical shear stress value for the same grain on a flatbed by the 
+following equation.   
+ 
+
+
+
+
+
+
+
+
+
+tan
+]
+sin
+sin
+tan
+cos
+[
+sin
+cos
+2
+/
+1
+2
+2
+2
+2
+
+
+
+cr
+cr
+     (4) 
+where  
+ψ   
+incident angle to slope  
+  
+angle of repose (taken as 32 deg in this paper) 
+β   
+slope angle  
+ 
+                    
+  
+ 
+Fig. 1. Rock Berm slope 
+ 
+Bed shear stress  
+The bed shear stress acting on the bed is made up from contributions 
+due to  
+ 
+Skin friction  
+ 
+Form drag 
+ 
+Sediment-transport (caused by momentum transfer) 
+ 
+It is important to note that only skin friction contribution acts directly 
+on the sediment grains and it is therefore this contribution which is used 
+to calculate the threshold of motion, bedload transport and pick-up rate 
+for grains in suspension. On the other hand, it is the total bed shear 
+stress that corresponds to the overall resistance of the flow and 
+determined the turbulence intensities which influence the diffusion of 
+the suspended sediment to higher levels in water column. When the bed 
+is flat and sediment transport is not too intense, then the total bed shear 
+stress is equal to the skin-friction contribution.  
+ 
+1. 
+Bed shear stress due to current  
+Note that the shear stress due to current (τc) can be calculated using 
+different methods (There can be 50% difference between the largest 
+and lowest calculated values of τc estimates). In this paper, the shear 
+stress due to current, τc, is calculated using friction velocity, u*, as 
+below.  
+2
+*
+u
+c
+
+
+  
+ 
+ 
+ 
+ 
+             (5) 
+where  
+              
+)
+(
+121
+.0
+7
+/
+1
+50
+*
+z
+U
+z
+d
+u
+
+
+
+
+
+
+
+ 
+ 
+z is distance from seabed  
+ 
+ρ   = density of water (kg/m3) 
+ 
+d50 = D50 particle diameter (taken as D50) 
+
+--- PAGE 3 ---
+ 
+Alternatively, drag coefficient can be used to calculate the shear stress 
+as shown below.  
+2
+U
+CD
+c
+
+
+                
+ 
+ 
+            (6) 
+where  
+U    =   depth averaged velocity  
+D
+C
+  =   drag coefficient, (this can be taken as 0.0025 if no 
+information is available) 
+ 
+CD can be calculated either based on a logarithmic velocity profile in 
+current, or by relating to Chezy coefficient C. 
+ 
+A. Based on a logarithmic velocity profile in current, 
+D
+C can be 
+calculated as below. 
+  
+2
+0
+)
+/
+(
+ln
+1
+40
+.0
+
+
+
+
+
+
+h
+z
+CD
+ 
+ 
+ 
+              (7) 
+ 
+Where 
+12
+/
+50
+0
+d
+z 
+ and h is water depth.  
+ 
+B. 
+Based on Chezy coefficient C, CD can be calculated as below. 
+2
+C
+g
+CD 
+   
+ 
+ 
+ 
+              (8) 
+where  
+)
+/
+12
+1
+log(
+18
+C
+sk
+h
+
+
+ 
+ 
+ks is hydraulic roughness (made of grain roughness and bed 
+form roughness), for flat bed, ks  can range from 2D50 for fine 
+sediments to 4D50 for coarse sediments. ks is taken as 2.5 D50 
+ 
+2. 
+Bed shear stress due to wave 
+Shear stress due to wave can be calculated as below.  
+2
+2
+1
+w
+w
+w
+U
+f
+
+
+
+      
+ 
+ 
+                              (9) 
+where  
+Uw 
+= bottom orbital velocity  √2 Urms ( where Urms is obtained 
+from  JONSWAP spectrum) 
+fw 
+= wave friction factor, 1.39 (A/z0) -0.52, where 
+12
+/
+50
+0
+d
+z 
+, and semi orbital excursion A = Uw Tp/2π. 
+(Tp is the period associated with the peak of the wave 
+energy spectrum). 
+ 
+3. Bed shear stress due to combined current and wave 
+The bed shear stresses beneath combined waves and currents are 
+enhanced beyond the values which would result from a simple linear 
+addition of the wave- alone and current alone stresses. This is because 
+of a non-linear interaction between the wave and current boundary 
+layers. There are more than 20 different theories and models which aim 
+to capture this interaction. The best fit to most models and data have 
+been captured by the following mean shear stress, τm . 
+2.3
+2.1
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+w
+c
+w
+c
+m
+
+
+
+
+
+  
+                            (10) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Where 
+c
+
+= bed shear stress due to current alone 
+w
+
+ = bed shear stress due to wave alone 
+ 
+The maximum bed shear stress is then obtained by,   
+2
+/
+1
+2
+2
+max
+]
+)
+sin
+(
+)
+cos
+[(
+
+
+
+
+
+
+w
+w
+m
+
+
+
+                        (11) 
+ 
+Where θ is angle between current direction and direction of wave 
+travel. τmax is used for the calculation of threshold of motion and 
+entrainment rate of sediments. When the wave and current induced 
+τmax is equal to or greater than the threshold bed shear stress, τβcr, the 
+bed is mobile.  
+ 
+METHODOLOGY 2  
+The traditional design method for the hydraulic stability of rock fill is 
+based on the incipient motion or critical shear concept. For 
+unidirectional steady flow the initial instability of bed material particles 
+on a horizontal, plane bed is described by the Shields criterion same as 
+Eq (1), but in section 5.2.1.3 of CIRIA Rock Manual the equation is 
+presented with different format with different symbols as below, 
+Shear stress parameter  
+
+gD
+w
+r
+
+
+
+
+
+
+  
+ 
+            (12) 
+where  is the shear stress (N/m²); 
+r
+ is the apparent mass density of 
+the stones (kg/m³); D is the sieve size (m) taken as D50. 
+Threshold Bed Shear stress 
+This criterion essentially expresses the critical value of the ratio of the 
+de-stabilising fluid forces (that tend to move the particle) to the 
+stabilising forces acting on a particle. The forces that tend to move the 
+bed material particle are related to the maximum shear stress exerted on 
+the bed by the moving fluid; the stabilising forces are related to the 
+submerged weight of the particle. When the ratio of the two forces, 
+represented by the shear stress (Shields) parameter, ψ, exceeds a critical 
+value, ψcr, movement is initiated. 
+ 
+ψcr = 0.03 – 0.035 for point at which stones first begin to move 
+ψcr = 0.05– 0.055 for limited movement  
+ 
+1. 
+Bed shear stress due to current  
+ 
+CIRIA Rock Manual calculates current-induced shear stress, τc, (N/m²), 
+acting on the bed in steady flow using the following equation, based on 
+Chézy’s roughness equation: 
+
+
+2
+C
+U
+g
+w
+c
+
+
+                
+ 
+                            (13) 
+where U is the depth-averaged current velocity (m/s) and C is the 
+Chézy coefficient (m1/2/s) (18 Log (1 +12h/ks)). When the bed is 
+hydraulically rough ( u*ks/ν > 70; as for rock) the value of C depends 
+only on the water depth, h (m), and the bed roughness, ks (m).  
+ 
+For uniform sediment the range of grain roughness is given by 
+50
+D
+k s
+= 1 to 2. Despite scatter, on average the best results seem to be 
+obtained using 
+sk = 
+90
+D
+ ؆ 2 x
+50
+D
+ for fine sediments and 
+sk = 2 
+
+--- PAGE 4 ---
+x
+90
+D
+ ؆4 x
+50
+D
+ for coarse material, assuming no bed-form 
+roughness.  Thus, 
+sk = 4 x
+50
+D
+ can be used for rocks.  
+2. Bed shear stress due to wave 
+CIRIA Rock Manual recommends the following equation between 
+maximum shear stress under oscillatory flow, 
+w
+
+ (N/m²), and the 
+relevant hydraulic parameters. 
+2
+0
+2
+1
+u
+f w
+w
+w
+
+
+
+                               
+ 
+ 
+            (14) 
+where 
+wf
+ is the friction factor (-) and 
+0
+u is the peak orbital velocity 
+near the bed (m/s²), which may be determined, as a first approximation, 
+by linear wave theory.
+wf
+ is determined assuming 
+0z = 
+sk /30 using 
+52
+.0
+0
+237
+.0
+
+
+
+
+
+
+
+
+s
+w
+k
+a
+f
+                                
+ 
+            (15) 
+Where 
+0
+a (m) is the amplitude of horizontal orbital wave motion at the 
+bed as defined below (T is wave period).  
+
+2
+0
+0
+T
+u
+a 
+                               
+ 
+ 
+            (16) 
+3. Bed shear stress due to combined current and wave 
+For the incipient motion of coarse material in oscillatory flow, the 
+Shields criterion for the initiation of motion is taken as 
+cr
+
+ = 0.03 and 
+the average oscillatory shear stress is used to calculate the critical shear 
+stress, (N/m²), evaluated using 
+)
+5.0
+(
+w
+c
+
+
+
+
+. Thus based on this 
+methodology, the particles start to be mobile when 
+)
+5.0
+(
+w
+c
+
+
+
+
+ 
+  0.03
+
+50
+gD
+w
+r
+
+
+. 
+PARAMETRIC STUDY ON STABILITY  
+Based on methodology 1, parametric study was undertaken to 
+determine the stable D50 under wave and current conditions in flat 
+seabeds. Hs (significant wave height) was ranged from 1m to 12m, Tp 
+was taken as 8s (Tp is period associated with the peak of the wave 
+energy spectrum, Tz which is zero crossing period = 0.781 Tp). Uc 
+(current velocity at 1m from seabed) was varied from 0.5m/s to 3m/s. 
+Results of parametric study are presented in graphical form from Fig. 2 
+to Fig. 9.   
+This paper introduces an Amplification factor (AF). The AF is 
+multiplied by the stable D50 for flat seabed (from Fig. 2 to Fig. 5) in 
+order to obtain the stable D50 for rock berms with side slopes (1:4 or 
+1:3).   
+ 
+WORKED EXAMPLE  
+Let us assume we have to find out the stable D50 in water depth of 20m 
+with Uc of 0.5 m/s, Hs of 4m and Tp of 8s. We can use Fig.2 to find the 
+stable D50, it can be seen that the stable D50 is ~7.5mm. Let us assume 
+that we now need to find out, what should be the stable D50 for a rock 
+berm with 1:3 side slope under the same wave and current conditions. 
+We already know that the stable D50 flat seabed is ~7.5mm. We need to 
+use Fig. 8 to conclude that the amplification factor (on D50 size) is ~4.5. 
+Thus the D50 for 1:3 rock berm is ~ 33.75mm (7.5 x 4.5). If we use the 
+equations, we will derive 34.5mm. Thus the use of chat is a quick way 
+to obtain D50 for rock beam design. 
+ 
+If we use Method 2 to find out the stable D50 for the same scenario 
+considered above, the resulting D50 for flat bed is ~7.88mm, which is 
+close to the value obtained from Method 1. Here, ks has been 
+considered as 2 x D50 as the particle size is more appropriate to be taken 
+as fine particle. 
+ 
+DISCUSSION  
+ 
+Stability of seabed grains is based on comparing the wave and current 
+induced shear stress on the seabed with critical bed-shear stress. This 
+concept is the same for both methodologies 1 & 2, but the evaluation of 
+critical stress and the method of combining current induced shear and 
+wave induced shear are different in the methodologies. Thus it is vital 
+that the two methodologies are not mixed and they should be applied 
+independently under the limitations of the methodology.  
+ 
+The methodology 2 – based on CIRIA Rock Manual produce lower 
+induced shear stresses than Methodology 1 (based on Soulby, 1997). 
+But it is important to note that this difference is offset by three facts 
+that are key for using the CIRIA methodology correctly.  
+ 
+1. Induced shear stress  
+the CIRIA Rock Manual states, (pg 548) 
+“where the critical shear stress is based on the average shear stress 
+under oscillatory flow  ( | 
+w
+
+  | = ½ 
+w
+
+), the shield parameter 
+should have a value of 0.03, to agree with the results Rance and 
+Warren (1968)”    
+Whereas, the methodology  1  (Soulsby, 1997)  provides the shield 
+parameter based on D* and not fixed at 0.03, thus its methodology of 
+combining wave and current to obtain the induced shear stresses is 
+different to that of methodology 2. 
+  
+2. Limitation of Methodology 2 (CIRIA Rock Manual) 
+It is to be noted that the CIRIA Rock Manual equation is applicable 
+only under the condition,  
+w
+c
+
+
+
+
+40
+.0
+  
+ 
+ 
+                        (17) 
+If equation (16) is not satisfied (i.e in relatively strong waves 
+combination with weak current), CIRIA Rock Manual recommends 
+the use of Methodology 1.   
+3. Amplification factor in Methodology 2.  
+CIRIA Rock Manual provides an Amplification factor (
+w
+k , equation 
+5.113 of the rock manual) for the bed shear stress as a result of waves 
+superimposing upon current..  
+ 
+ 
+2
+0
+2
+2
+2
+1
+1
+
+
+
+
+
+
+U
+u
+g
+C
+f
+k
+w
+w
+ 
+                          (18) 
+
+--- PAGE 5 ---
+ 
+Fig. 2. Stable D50 under Uc =0.5m/s, Tp= 8s, Hs = 1m to 12m.  
+ 
+ 
+ 
+Fig. 3. Stable D50 under Uc =1m/s, Tp= 8s, Hs = 1m to 12m. 
+Wave breaking limit  
+Hs =1 m 
+Hs =12 m 
+Wave breaking limit  
+Hs =1 m 
+Hs =12 m 
+
+--- PAGE 6 ---
+ 
+Fig. 4. Stable D50 under Uc =2 m/s, Tp= 8s, Hs = 1m to12m  
+ 
+ 
+ 
+Fig. 5. Stable D50 under Uc = 3 m/s, Tp= 8s, Hs = 1m to 12m. 
+ 
+Wave breaking limit  
+Hs =1 m 
+Hs =12 m 
+Wave breaking limit  
+Hs =1 m 
+Hs =12 m 
+
+--- PAGE 7 ---
+ 
+ 
+ 
+ 
+Fig. 6. Effect of Tp on stable D50 under Uc =1 m/s, Hs = 1m to 3m. 
+ 
+ 
+Fig. 7. Amplification on stable D50 for rock berm of 1:4 under Uc =0.5m/s, Tp= 
+8s, Hs = 1m to 10m. 
+Fig. 8. Amplification on stable D50 for rock berm of 1:3 under Uc =0.5m/s, Tp= 
+8s, Hs = 1m to 10m. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 9. Amplification on stable D50 for rock berm of 1:4 & 1:3 under Uc = 
+0.5m/s,1m/s Tp= 8s, Hs = 3m.  
+ 
+ 
+Fig. 6 shows the effect of Tp on the D50 for given Hs. It can be 
+concluded that effect of Tp is only prominent for water depths below 
+~5m.  
+ 
+ Fig. 7 and Fig. 8 are amplification factor (AF) to be applied to the D50 
+obtained for flat seabed (from Fig. 2 to Fig. 5) for rock beams with side 
+slope 1:4 and 1:3 respectively.  
+ 
+Fig. 9 shows the effect of Uc on the amplification factor. As Uc 
+increases (Uc is the current velocity 1m above seabed), the AF 
+decreases for water depth below ~15m and increased for water depths 
+above ~15m.  
+ 
+CONCLUSION  
+This paper presented two fundamental methodologies (Methodology 1- 
+based on Shields parameter (Soulsby, 1997) and Methodology 2- based 
+on CIRIA Rock Manual (2007)) for stability assessment of rock beams.   
+   
+Key factors to be considered in using the methodologies correctly were 
+highlighted in this paper. Parametric study (based on Methodology 1) 
+was undertaken for ranging water depths, wave heights and current 
+conditions. The results were presented in graphical form such that these 
+can be used as design charts by engineers to easily and quickly obtain 
+the stable D50 size for rock on flat seabed or rock berms of 1:3 or 1:4 
+slopes with varying water depths (0-300m).  
+ 
+ 
+REFERENCES 
+ 
+CIRIA Rock Manual C683, 2007. 
+Mitchener, H. and Torfs, H., “Erosion of mud/sand mixtures”, Journal of 
+coastal engineering, Volume 29, pages 1-25. 
+Panagiotopoulos, G. Voulgaris, M. B. Collins, “The influence of clay on 
+the threshold of movement of fine sandy beds”, Coastal Engineering, 
+Volume 32, Issue 1, October 1997, Pages 19-43. 
+Soulsby, R, 1997, Dynamics of marine sands - a manual for practical 
+applications, HR Wallingford, Thomas Telford, 1998. 
+ 
+ 
+ 
+ 
+ 
+
